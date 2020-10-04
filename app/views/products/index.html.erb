@@ -1,9 +1,17 @@
 <% if @products.empty? %>
   <p>There are no products available.</p>
 <% else %>
+  <%@prevCat = ''%>
   <% @products.each do |product| %>
-  <h3><%= product.title %></h3>
-  <p>Price: $<%= product.price %></p>
-  <p>Quantity: <%= product.stock_quantity %></p>
+    <%@newCat = product.category.name%>
+    <% if @prevCat != @newCat%>
+      <h1><%= product.category.name %></h1>
+    <% end %>
+    <div class='product'>
+      <h3><%= product.title %></h3>
+      <p><b>Price:</b> $<%= product.price %></p>
+      <p><b>Quantity:</b> <%= product.stock_quantity %></p>
+      <%@prevCat = product.category.name%>
+    </div>
   <% end %>
 <% end %>
